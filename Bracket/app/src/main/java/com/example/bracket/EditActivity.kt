@@ -66,4 +66,20 @@ class EditActivity : AppCompatActivity() {
             container.addView(textInputLayout)
         }
     }
+
+    private fun getPlayerNames(): List<String> {
+        val container = findViewById<ViewGroup>(R.id.playersContainer)
+        val playerNames = mutableListOf<String>()
+
+        for (i in 0 until container.childCount) {
+            val textInputLayout = container.getChildAt(i) as TextInputLayout
+            val editText = textInputLayout.editText
+            val playerName = editText?.text.toString()
+            if (playerName.isNotBlank()) {
+                playerNames.add(playerName)
+            }
+        }
+
+        return playerNames
+    }
 }
