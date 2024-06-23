@@ -27,9 +27,7 @@
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <LinearLayout
         android:id="@+id/linearButton"
@@ -39,8 +37,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="64dp"
-        >
+        android:layout_marginBottom="64dp">
         <Button
             android:id="@+id/finalizar"
             android:layout_width="wrap_content"
@@ -53,8 +50,6 @@
             android:background="@drawable/fondobtn"
             android:paddingEnd="8dp"
             android:gravity="center_vertical|center_horizontal"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center"/>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
