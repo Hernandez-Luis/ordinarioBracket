@@ -30,6 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="vertical"
         android:gravity="center_horizontal">
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_nombreTorneo"
             android:layout_width="match_parent"
@@ -78,23 +79,13 @@
             </androidx.appcompat.widget.AppCompatAutoCompleteTextView>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_nombre1"
+        <LinearLayout
+            android:id="@+id/playersContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre del jugador"
+            android:orientation="vertical"
             android:layout_marginTop="16dp"
-            android:layout_marginHorizontal="96dp"
-            android:layout_weight="0.5"
-            app:endIconMode="clear_text">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tie_nombre1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text">
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
-
+            android:layout_marginHorizontal="96dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -105,8 +96,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ly1v2"
-        >
+        app:layout_constraintTop_toBottomOf="@id/ly1v2">
 
         <Button
             android:id="@+id/cancelarTorneo"
@@ -121,8 +111,8 @@
             android:paddingEnd="8dp"
             android:layout_marginEnd="16dp"
             android:gravity="center_vertical|center_horizontal"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center"/>
+
         <Button
             android:id="@+id/guardarTorneo"
             android:layout_width="wrap_content"
@@ -135,7 +125,6 @@
             android:background="@drawable/fondobtn"
             android:paddingEnd="8dp"
             android:gravity="center_vertical|center_horizontal"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
