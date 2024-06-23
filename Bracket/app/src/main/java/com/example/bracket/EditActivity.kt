@@ -51,8 +51,10 @@ class EditActivity : AppCompatActivity() {
 
         val botonGuardar: Button = findViewById(R.id.guardarTorneo)
         botonGuardar.setOnClickListener {
-            val intent2 = Intent(this, EditActivityIniciado::class.java)
-            startActivity(intent2)
+            val intent = Intent(this, EditActivityIniciado::class.java)
+            val playerNames = getPlayerNames()
+            intent.putStringArrayListExtra("playerNames", ArrayList(playerNames))
+            startActivity(intent)
         }
     }
 
