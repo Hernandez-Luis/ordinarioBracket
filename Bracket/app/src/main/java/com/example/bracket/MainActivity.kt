@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         val boton:Button = findViewById(R.id.botonAgregarTorneo);
         boton.setOnClickListener {
             // Acción a realizar cuando se hace clic en el botón
-            val intent = Intent(this,InicioTorneo::class.java)
+            val intent = Intent(this,EditActivity::class.java)
             startActivity(intent)
         }
 
