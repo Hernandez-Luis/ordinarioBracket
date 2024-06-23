@@ -14,10 +14,19 @@
         android:layout_height="wrap_content"
         android:text="@string/bracket"
         android:fontFamily="sans-serif-medium"
-        android:textSize="32dp"
+        android:textSize="@dimen/textSize1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/layout_marginTopTitle"
+        android:textColor="@color/azul5"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewImage"
+        android:layout_width="@dimen/widthIMG"
+        android:layout_height="@dimen/heightIMG"
+        app:cardCornerRadius="@dimen/radius"
+        android:layout_marginTop="@dimen/radius"
         android:layout_marginTop="64dp"
         android:textColor="@color/azul6"/>
 
@@ -37,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
+            android:src="@drawable/espadas2"
             android:src="@drawable/game"
             android:scaleType="fitCenter"/>
 
@@ -57,13 +67,18 @@
             android:id="@+id/botonAgregarTorneo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Agregar torneo"
+            android:drawableLeft="@drawable/add"
+            android:drawablePadding="@dimen/buttonPadding"
+            android:paddingStart="@dimen/buttonStart"
             android:text="@string/agregar_torneo"
             android:drawablePadding="8dp"
             android:paddingStart="8dp"
             android:background="@drawable/fondobtn"
-            android:paddingEnd="8dp"
+            android:paddingEnd="@dimen/buttonStart"
             android:gravity="center_vertical|center_horizontal"
             android:layout_gravity="center"
+            android:textSize="@dimen/buttontext"
             android:textSize="20dp"
             android:drawableLeft="@drawable/add"
             android:textColor="@color/azul5"

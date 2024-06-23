@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Activity_Main -->
+    <dimen name="textSize1"> 32dp </dimen>
+    <dimen name="layout_marginTopTitle"> 64dp </dimen>
+    <dimen name="widthIMG"> 160dp </dimen>
+    <dimen name="radius"> 16dp </dimen>
+    <dimen name="buttonPadding"> 8dp </dimen>
+    <dimen name="buttonStart"> 8dp </dimen>
+    <dimen name="buttontext"> 20dp </dimen>
+    <dimen name="heightIMG"> 160dp </dimen>
+
+
+    <!-- Edit_Activity -->
+    <dimen name="text_BRACKET"> 32dp </dimen>
+    <dimen name="margin_top_Liner"> 32dp </dimen>
+    <dimen name="layout_marginHorizontal"> 32dp </dimen>
+
+
+
+
+</resources>
