@@ -25,7 +25,6 @@
 
             android:layout_marginTop="@dimen/layout_marginTopTitle"
 
-            android:layout_marginTop="64dp"
 
             android:textColor="@color/azul5"/>
 
@@ -44,10 +43,8 @@
                 android:id="@+id/til_nombreTorneo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre del torneo"
                 android:layout_marginHorizontal="@dimen/layout_marginHorizontal"
                 android:hint="@string/nombre_del_torneo"
-                android:layout_marginHorizontal="32dp"
                 android:layout_weight="0.5"
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
