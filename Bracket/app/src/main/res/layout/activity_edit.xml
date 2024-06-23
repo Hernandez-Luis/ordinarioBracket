@@ -1,130 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditActivity">
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BRACKET"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="64dp"/>
-
-    <LinearLayout
-        android:id="@+id/ly1v2"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_nombreTorneo"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Nombre del torneo"
-            android:layout_marginHorizontal="32dp"
-            android:layout_weight="0.5"
-            app:endIconMode="clear_text">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tie_nombreTorneo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text">
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_tipoEliminacion"
-            android:layout_width="match_parent"
-            android:layout_marginTop="16dp"
-            android:layout_height="wrap_content"
-            android:hint="Tipo de eliminacion"
-            android:layout_marginHorizontal="32dp"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                android:id="@+id/actv_tipoEliminacion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false">
-            </androidx.appcompat.widget.AppCompatAutoCompleteTextView>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_numEquipos"
-            android:layout_width="match_parent"
-            android:layout_marginTop="16dp"
-            android:layout_height="wrap_content"
-            android:hint="Numero de jugadores"
-            android:layout_marginHorizontal="32dp"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                android:id="@+id/actv_numEquipos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false">
-            </androidx.appcompat.widget.AppCompatAutoCompleteTextView>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:text="BRACKET"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="64dp"/>
 
         <LinearLayout
-            android:id="@+id/playersContainer"
+            android:id="@+id/ly1v2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:orientation="vertical"
-            android:layout_marginTop="16dp"
-            android:layout_marginHorizontal="96dp" />
-    </LinearLayout>
+            android:gravity="center_horizontal">
 
-    <LinearLayout
-        android:id="@+id/linearButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ly1v2">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_nombreTorneo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre del torneo"
+                android:layout_marginHorizontal="32dp"
+                android:layout_weight="0.5"
+                app:endIconMode="clear_text">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tie_nombreTorneo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/cancelarTorneo"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_tipoEliminacion"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
+                android:hint="Tipo de eliminacion"
+                android:layout_marginHorizontal="32dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/actv_tipoEliminacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_numEquipos"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
+                android:hint="Numero de equipos"
+                android:layout_marginHorizontal="32dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/actv_numEquipos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/playersContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="96dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancelar"
-            android:drawableLeft="@drawable/cancel_24"
-            android:drawablePadding="8dp"
-            android:paddingStart="8dp"
-            android:textColor="@color/azul5"
-            android:background="@drawable/fondobtn"
-            android:paddingEnd="8dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:layout_gravity="center"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ly1v2">
 
-        <Button
-            android:id="@+id/guardarTorneo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Guardar"
-            android:textColor="@color/azul5"
-            android:drawableLeft="@drawable/add_verde"
-            android:drawablePadding="8dp"
-            android:paddingStart="8dp"
-            android:background="@drawable/fondobtn"
-            android:paddingEnd="8dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/cancelarTorneo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:drawableLeft="@drawable/cancel_24"
+                android:drawablePadding="8dp"
+                android:paddingStart="8dp"
+                android:textColor="@color/azul5"
+                android:background="@drawable/fondobtn"
+                android:paddingEnd="8dp"
+                android:textSize="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/guardarTorneo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guardar"
+                android:textSize="16dp"
+                android:textColor="@color/azul5"
+                android:drawableLeft="@drawable/add_verde"
+                android:drawablePadding="8dp"
+                android:paddingStart="8dp"
+                android:background="@drawable/fondobtn"
+                android:paddingEnd="8dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
