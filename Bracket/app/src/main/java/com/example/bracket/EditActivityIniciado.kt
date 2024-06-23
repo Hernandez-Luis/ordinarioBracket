@@ -2,8 +2,10 @@ package com.example.bracket
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -35,6 +37,14 @@ class EditActivityIniciado : AppCompatActivity() {
             // Acción a realizar cuando se hace clic en el botón
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
+        }
+
+        val playerNames = intent.getStringArrayListExtra("playerNames") ?: arrayListOf()
+        val container = findViewById<ViewGroup>(R.id.ly1v3)
+        for (playerName in playerNames) {
+            val textView = TextView(this)
+            textView.text = playerName
+            container.addView(textView)
         }
     }
 }

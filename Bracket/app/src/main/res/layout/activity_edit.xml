@@ -16,13 +16,17 @@
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BRACKET"
+            android:text="@string/bracket"
             android:fontFamily="sans-serif-medium"
             android:textSize="@dimen/text_BRACKET"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+
             android:layout_marginTop="@dimen/layout_marginTopTitle"
+
+            android:layout_marginTop="64dp"
+
             android:textColor="@color/azul5"/>
 
         <LinearLayout
@@ -42,6 +46,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Nombre del torneo"
                 android:layout_marginHorizontal="@dimen/layout_marginHorizontal"
+                android:hint="@string/nombre_del_torneo"
+                android:layout_marginHorizontal="32dp"
                 android:layout_weight="0.5"
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
@@ -56,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
                 android:layout_height="wrap_content"
-                android:hint="Tipo de eliminacion"
+                android:hint="@string/tipo_de_eliminacion"
                 android:layout_marginHorizontal="32dp"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
                 <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -71,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
                 android:layout_height="wrap_content"
-                android:hint="Numero de equipos"
+                android:hint="@string/numero_de_equipos"
                 android:layout_marginHorizontal="32dp"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
                 <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -106,14 +112,14 @@
                 android:id="@+id/cancelarTorneo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancelar"
+                android:text="@string/cancelar"
                 android:drawableLeft="@drawable/cancel_24"
                 android:drawablePadding="8dp"
                 android:paddingStart="8dp"
                 android:textColor="@color/azul5"
                 android:background="@drawable/fondobtn"
                 android:paddingEnd="8dp"
-                android:textSize="16dp"
+                android:textSize="18dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center_vertical|center_horizontal"
                 android:layout_gravity="center"/>
@@ -122,8 +128,8 @@
                 android:id="@+id/guardarTorneo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Guardar"
-                android:textSize="16dp"
+                android:text="@string/guardar"
+                android:textSize="18dp"
                 android:textColor="@color/azul5"
                 android:drawableLeft="@drawable/add_verde"
                 android:drawablePadding="8dp"
