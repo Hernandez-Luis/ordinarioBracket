@@ -51,7 +51,9 @@ class EditActivity : AppCompatActivity() {
 
         val botonGuardar: Button = findViewById(R.id.guardarTorneo)
         botonGuardar.setOnClickListener {
-            val intent = Intent(this, TorneoIniciado::class.java)
+            val intent = Intent(this, EditActivityIniciado::class.java)
+            val playerNames = getPlayerNames()
+            intent.putStringArrayListExtra("playerNames", ArrayList(playerNames))
             startActivity(intent)
         }
     }
@@ -65,5 +67,21 @@ class EditActivity : AppCompatActivity() {
             textInputLayout.hint = "Nombre del jugador $i"
             container.addView(textInputLayout)
         }
+    }
+
+    private fun getPlayerNames(): List<String> {
+        val container = findViewById<ViewGroup>(R.id.playersContainer)
+        val playerNames = mutableListOf<String>()
+
+        for (i in 0 until container.childCount) {
+            val textInputLayout = container.getChildAt(i) as TextInputLayout
+            val editText = textInputLayout.editText
+            val playerName = editText?.text.toString()
+            if (playerName.isNotBlank()) {
+                playerNames.add(playerName)
+            }
+        }
+
+        return playerNames
     }
 }

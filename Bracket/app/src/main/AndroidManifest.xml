@@ -13,13 +13,10 @@
         android:theme="@style/Theme.Bracket"
         tools:targetApi="31">
         <activity
+            android:name=".EditActivityIniciado"
+            android:exported="false" />
+        <activity
             android:name=".EditActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TorneoIniciado"
-            android:exported="false" />
-        <activity
-            android:name=".InicioTorneo"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -2,23 +2,26 @@ package com.example.bracket
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.bracket.databinding.ActivityEditBinding
 import com.example.bracket.databinding.ActivityMainBinding
 
-class TorneoIniciado : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class EditActivityIniciado : AppCompatActivity() {
+    private lateinit var binding: ActivityEditBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityEditBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
-        //setContentView(R.layout.activity_torneo_iniciado)
+        setContentView(R.layout.activity_edit_iniciado)
 
         val tipoEliminacion = arrayOf("Directa", "Doble")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tipoEliminacion)
@@ -34,6 +37,14 @@ class TorneoIniciado : AppCompatActivity() {
             // Acción a realizar cuando se hace clic en el botón
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
+        }
+
+        val playerNames = intent.getStringArrayListExtra("playerNames") ?: arrayListOf()
+        val container = findViewById<ViewGroup>(R.id.ly1v3)
+        for (playerName in playerNames) {
+            val textView = TextView(this)
+            textView.text = playerName
+            container.addView(textView)
         }
     }
 }
