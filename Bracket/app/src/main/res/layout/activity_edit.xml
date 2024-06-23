@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_marginTop="16dp"
             android:layout_height="wrap_content"
-            android:hint="Numero de equipos"
+            android:hint="Numero de jugadores"
             android:layout_marginHorizontal="32dp"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
             <androidx.appcompat.widget.AppCompatAutoCompleteTextView
