@@ -29,6 +29,7 @@ class EditActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        binding.tieNombreTorneo.setText((intent.extras?.getString(getString(R.string.k_nombreTorneo))))
 
         val tipoEliminacion = arrayOf("Directa", "Doble")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tipoEliminacion)
@@ -55,6 +56,13 @@ class EditActivity : AppCompatActivity() {
             val playerNames = getPlayerNames()
             intent.putStringArrayListExtra("playerNames", ArrayList(playerNames))
             startActivity(intent)
+
+            intent.putExtra(getString(R.string.k_nombreTorneo),binding.tieNombreTorneo.text)
+
+            //startActivity(intent)
+            //startActivityForResult(intent, RC_EDIT) //Metodo obsoleto
+
+            enviarInfo();
         }
     }
 
@@ -83,5 +91,12 @@ class EditActivity : AppCompatActivity() {
         }
 
         return playerNames
+    }
+
+    fun enviarInfo (){
+        val intent = Intent()
+        intent.putExtra(getString(R.string.k_nombreTorneo),binding.tieNombreTorneo.text.toString())
+        setResult(RESULT_OK,intent)
+        finish()
     }
 }
