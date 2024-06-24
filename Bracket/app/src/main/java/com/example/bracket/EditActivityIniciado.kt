@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,18 +22,20 @@ class EditActivityIniciado : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditBinding.inflate(layoutInflater)
+
         enableEdgeToEdge()
         setContentView(binding.root)
         setContentView(R.layout.activity_edit_iniciado)
 
-        val tipoEliminacion = arrayOf("Directa", "Doble")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tipoEliminacion)
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
 
         val botonFinalizar: Button = findViewById(R.id.finalizar)
         botonFinalizar.setOnClickListener {
@@ -39,12 +44,49 @@ class EditActivityIniciado : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val nombreTorneo = intent.getStringExtra(getString(R.string.k_nombreTorneo))
+
+        // Mostrar el nombre del torneo en un TextView u otro elemento
+        val textViewNombreTorneo = findViewById<TextView>(R.id.textViewNombreTorneo)
+        textViewNombreTorneo.text = nombreTorneo
+
         val playerNames = intent.getStringArrayListExtra("playerNames") ?: arrayListOf()
+        playerNames.shuffle()
         val container = findViewById<ViewGroup>(R.id.ly1v3)
-        for (playerName in playerNames) {
-            val textView = TextView(this)
-            textView.text = playerName
-            container.addView(textView)
+        // Agrupar los nombres de dos en dos y crear RadioButtons
+        for (i in playerNames.indices step 2) {
+            val radioGroup = RadioGroup(this).apply {
+                orientation = RadioGroup.VERTICAL
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    setMargins(120, 0, 0, 60)
+                }
+            }
+
+            val radioButton1 = RadioButton(this).apply {
+                text = playerNames[i]
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+            }
+            radioGroup.addView(radioButton1)
+
+            if (i + 1 < playerNames.size) {
+                val radioButton2 = RadioButton(this).apply {
+                    text = playerNames[i + 1]
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                }
+                radioGroup.addView(radioButton2)
+            }
+
+            container.addView(radioGroup)
         }
     }
+
 }

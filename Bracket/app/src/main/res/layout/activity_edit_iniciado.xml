@@ -8,8 +8,9 @@
     android:layout_height="match_parent"
     tools:context=".EditActivityIniciado">
 
+
     <TextView
-        android:id="@+id/textViewTitle"
+        android:id="@+id/textViewNombreTorneo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Torneo Mario Kart"
@@ -20,14 +21,20 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="64dp"/>
 
+
+
     <LinearLayout
         android:id="@+id/ly1v3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreTorneo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="60dp"
+        />
+
+
 
     <LinearLayout
         android:id="@+id/linearButton"
