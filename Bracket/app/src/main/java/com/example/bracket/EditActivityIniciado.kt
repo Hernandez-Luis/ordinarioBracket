@@ -3,7 +3,6 @@ package com.example.bracket
 import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.RadioButton
@@ -13,21 +12,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.bracket.databinding.ActivityEditBinding
-import com.example.bracket.databinding.ActivityMainBinding
 
 class EditActivityIniciado : AppCompatActivity() {
-    private lateinit var binding: ActivityEditBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEditBinding.inflate(layoutInflater)
-
-        enableEdgeToEdge()
-        setContentView(binding.root)
         setContentView(R.layout.activity_edit_iniciado)
 
-
+        enableEdgeToEdge()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -35,25 +27,23 @@ class EditActivityIniciado : AppCompatActivity() {
             insets
         }
 
-
-
         val botonFinalizar: Button = findViewById(R.id.finalizar)
         botonFinalizar.setOnClickListener {
-            // Acción a realizar cuando se hace clic en el botón
-            val intent = Intent(this,MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
         val nombreTorneo = intent.getStringExtra(getString(R.string.k_nombreTorneo))
+        val tipoEliminacion = intent.getStringExtra(getString(R.string.k_tipoEliminaciono))
+        val numEquipos = intent.getStringExtra(getString(R.string.k_numEquipos))
+        val playerNames = intent.getStringArrayListExtra("playerNames") ?: arrayListOf()
 
-        // Mostrar el nombre del torneo en un TextView u otro elemento
         val textViewNombreTorneo = findViewById<TextView>(R.id.textViewNombreTorneo)
         textViewNombreTorneo.text = nombreTorneo
 
-        val playerNames = intent.getStringArrayListExtra("playerNames") ?: arrayListOf()
-        playerNames.shuffle()
         val container = findViewById<ViewGroup>(R.id.ly1v3)
-        // Agrupar los nombres de dos en dos y crear RadioButtons
+        playerNames.shuffle()
+
         for (i in playerNames.indices step 2) {
             val radioGroup = RadioGroup(this).apply {
                 orientation = RadioGroup.VERTICAL
@@ -87,6 +77,16 @@ class EditActivityIniciado : AppCompatActivity() {
 
             container.addView(radioGroup)
         }
-    }
 
+        val botonEditar: Button = findViewById(R.id.editar)
+        botonEditar.setOnClickListener {
+            val intent = Intent(this, EditActivity::class.java).apply {
+                putExtra(getString(R.string.k_nombreTorneo), nombreTorneo)
+                putExtra(getString(R.string.k_tipoEliminaciono), tipoEliminacion)
+                putExtra(getString(R.string.k_numEquipos), numEquipos)
+                putStringArrayListExtra("playerNames", ArrayList(playerNames))
+            }
+            startActivity(intent)
+        }
+    }
 }

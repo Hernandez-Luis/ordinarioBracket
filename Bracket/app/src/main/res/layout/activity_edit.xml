@@ -18,18 +18,21 @@
             android:layout_height="wrap_content"
             android:text="@string/bracket"
             android:fontFamily="sans-serif-medium"
-            android:textSize="32dp"
+            android:textSize="@dimen/text_BRACKET"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="64dp"
+
+            android:layout_marginTop="@dimen/layout_marginTopTitle"
+
+
             android:textColor="@color/azul5"/>
 
         <LinearLayout
             android:id="@+id/ly1v2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/margin_top_Liner"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,8 +43,8 @@
                 android:id="@+id/til_nombreTorneo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/layout_marginHorizontal"
                 android:hint="@string/nombre_del_torneo"
-                android:layout_marginHorizontal="32dp"
                 android:layout_weight="0.5"
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
