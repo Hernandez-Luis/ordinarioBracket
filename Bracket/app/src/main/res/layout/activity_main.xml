@@ -32,6 +32,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+
+        <ImageView
+            android:id="@+id/figura_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/game"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"/>
+
     <ImageView
         android:id="@+id/figura_perfil"
         android:layout_width="match_parent"
@@ -39,6 +48,7 @@
         android:adjustViewBounds="true"
         android:src="@drawable/espadas2"
         android:scaleType="fitCenter"/>
+
 
 </androidx.cardview.widget.CardView>
 
