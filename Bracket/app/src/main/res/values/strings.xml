@@ -15,5 +15,6 @@
     <string name="numero_de_equipos">Numero de equipos</string>
 
     <string name="k_nombreTorneo">key_nombreTorneo</string>
-
+    <string name="k_tipoEliminaciono">key_nombreTorneo</string>
+    <string name="k_numEquipos">key_nombreTorneo</string>
 </resources>
