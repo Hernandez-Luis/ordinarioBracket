@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bracket.databinding.ActivityEditBinding
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 class EditActivity : AppCompatActivity() {
@@ -29,20 +28,31 @@ class EditActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        binding.tieNombreTorneo.setText((intent.extras?.getString(getString(R.string.k_nombreTorneo))))
 
-        val tipoEliminacion = arrayOf("Directa", "Doble")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tipoEliminacion)
+        val nombreTorneo = intent.getStringExtra(getString(R.string.k_nombreTorneo))
+        val tipoEliminacion = intent.getStringExtra(getString(R.string.k_tipoEliminaciono))
+        val numEquipos = intent.getStringExtra(getString(R.string.k_numEquipos))
+        val playerNames = intent.getStringArrayListExtra("playerNames") ?: arrayListOf()
+
+        binding.tieNombreTorneo.setText(nombreTorneo)
+        binding.actvTipoEliminacion.setText(tipoEliminacion, false)
+        binding.actvNumEquipos.setText(numEquipos, false)
+
+        val tipoEliminacionArray = arrayOf("Directa", "Doble")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tipoEliminacionArray)
         binding.actvTipoEliminacion.setAdapter(adapter)
 
-        val numeroEquipos = arrayOf("4", "8")
-        val adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, numeroEquipos)
+        val numeroEquiposArray = arrayOf("4", "8")
+        val adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, numeroEquiposArray)
         binding.actvNumEquipos.setAdapter(adapter2)
 
         binding.actvNumEquipos.setOnItemClickListener { _, _, position, _ ->
-            val numPlayers = numeroEquipos[position].toInt()
+            val numPlayers = numeroEquiposArray[position].toInt()
             addPlayerInputs(numPlayers)
         }
+
+        addPlayerInputs(playerNames.size)
+        setPlayerNames(playerNames)
 
         val botonCancelar: Button = findViewById(R.id.cancelarTorneo)
         botonCancelar.setOnClickListener {
@@ -55,14 +65,10 @@ class EditActivity : AppCompatActivity() {
             val intent = Intent(this, EditActivityIniciado::class.java)
             val playerNames = getPlayerNames()
             intent.putStringArrayListExtra("playerNames", ArrayList(playerNames))
+            intent.putExtra(getString(R.string.k_nombreTorneo), binding.tieNombreTorneo.text.toString())
             startActivity(intent)
 
-            intent.putExtra(getString(R.string.k_nombreTorneo),binding.tieNombreTorneo.text)
-
-            //startActivity(intent)
-            //startActivityForResult(intent, RC_EDIT) //Metodo obsoleto
-
-            enviarInfo();
+            enviarInfo()
         }
     }
 
@@ -89,14 +95,25 @@ class EditActivity : AppCompatActivity() {
                 playerNames.add(playerName)
             }
         }
-
         return playerNames
     }
 
-    fun enviarInfo (){
+    private fun setPlayerNames(playerNames: List<String>) {
+        val container = findViewById<ViewGroup>(R.id.playersContainer)
+        for (i in 0 until container.childCount) {
+            val textInputLayout = container.getChildAt(i) as TextInputLayout
+            val editText = textInputLayout.editText
+            editText?.setText(playerNames[i])
+        }
+    }
+
+    fun enviarInfo() {
         val intent = Intent()
-        intent.putExtra(getString(R.string.k_nombreTorneo),binding.tieNombreTorneo.text.toString())
-        setResult(RESULT_OK,intent)
+        intent.putExtra(getString(R.string.k_nombreTorneo), binding.tieNombreTorneo.text.toString())
+        intent.putExtra(getString(R.string.k_tipoEliminaciono), binding.actvTipoEliminacion.text.toString())
+        intent.putExtra(getString(R.string.k_numEquipos), binding.actvNumEquipos.text.toString())
+
+        setResult(RESULT_OK, intent)
         finish()
     }
 }

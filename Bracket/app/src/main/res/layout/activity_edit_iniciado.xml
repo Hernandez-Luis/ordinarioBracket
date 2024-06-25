@@ -45,6 +45,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="64dp">
+
+        <Button
+            android:id="@+id/editar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar"
+            android:drawableLeft="@drawable/agregar"
+            android:drawablePadding="8dp"
+            android:textColor="@color/black"
+            android:paddingStart="8dp"
+            android:background="@drawable/fondobtn"
+            android:paddingEnd="8dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_gravity="center"/>
         <Button
             android:id="@+id/finalizar"
             android:layout_width="wrap_content"
