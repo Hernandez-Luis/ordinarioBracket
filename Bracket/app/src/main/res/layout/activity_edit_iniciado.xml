@@ -1,119 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".EditActivityIniciado">
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-    <TextView
-        android:id="@+id/textViewNombreTorneo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Torneo Mario Kart"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="@dimen/text_BRACKET"
-        android:textColor="@color/azul5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="64dp"
-        />
-
-    <TextView
-        android:id="@+id/textDescripcion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Selecciona el ganador de cada bina"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="12dp"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNombreTorneo"
-        android:layout_marginTop="16dp"
-        />
-
-    <LinearLayout
-        android:id="@+id/ly1v3"
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/textDescripcion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp"
-        />
-    <ImageView
-        android:id="@+id/figura_perfil"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/domino"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSiguienteRonda"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_height="match_parent"
+        tools:context=".EditActivityIniciado">
 
-    <Button
-        android:id="@+id/buttonSiguienteRonda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Siguiente Ronda"
-        android:textSize="18dp"
-        android:textColor="@color/azul5"
-        android:background="@drawable/fondobtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/linearButton"
-        android:layout_marginBottom="32dp"
-        android:drawableLeft="@drawable/outline_360_24"/>
-    <LinearLayout
-        android:id="@+id/linearButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="64dp"
-        >
-
-        <Button
-            android:id="@+id/editar"
+        <TextView
+            android:id="@+id/textViewNombreTorneo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar"
-            android:drawableLeft="@drawable/edit_pencil"
-            android:drawablePadding="8dp"
-            android:paddingStart="8dp"
+            android:text="Torneo Mario Kart"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="@dimen/text_BRACKET"
+            android:textColor="@color/azul5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="64dp"
+            />
+
+        <TextView
+            android:id="@+id/textDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecciona el ganador de cada bina"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="12dp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNombreTorneo"
+            android:layout_marginTop="16dp"
+            />
+
+        <LinearLayout
+            android:id="@+id/ly1v3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/textDescripcion"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="60dp"
+            />
+        <ImageView
+            android:id="@+id/figura_perfil"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/domino"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="32dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toBottomOf="@id/ly1v3"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSiguienteRonda"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button
+            android:id="@+id/buttonSiguienteRonda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Siguiente Ronda"
             android:textSize="18dp"
             android:textColor="@color/azul5"
             android:background="@drawable/fondobtn"
-            android:paddingEnd="8dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:layout_gravity="center"
-            android:layout_marginEnd="24dp"/>
-
-
-
-        <Button
-            android:id="@+id/finalizar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/figura_perfil"
+            android:layout_marginBottom="32dp"
+            android:drawableLeft="@drawable/outline_360_24"/>
+        <LinearLayout
+            android:id="@+id/linearButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Finalizar"
-            android:drawableLeft="@drawable/check"
-            android:drawablePadding="8dp"
-            android:paddingStart="8dp"
-            android:background="@drawable/fondobtn"
-            android:paddingEnd="8dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:layout_gravity="center"
-            android:textSize="18dp"
-            android:textColor="@color/azul5"
-            android:layout_marginStart="24dp"/>
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttonSiguienteRonda"
+            android:layout_marginBottom="64dp"
+            >
 
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/editar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar"
+                android:drawableLeft="@drawable/edit_pencil"
+                android:drawablePadding="8dp"
+                android:paddingStart="8dp"
+                android:textSize="18dp"
+                android:textColor="@color/azul5"
+                android:background="@drawable/fondobtn"
+                android:paddingEnd="8dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_gravity="center"
+                android:layout_marginEnd="24dp"/>
+
+
+
+            <Button
+                android:id="@+id/finalizar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Finalizar"
+                android:drawableLeft="@drawable/check"
+                android:drawablePadding="8dp"
+                android:paddingStart="8dp"
+                android:background="@drawable/fondobtn"
+                android:paddingEnd="8dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_gravity="center"
+                android:textSize="18dp"
+                android:textColor="@color/azul5"
+                android:layout_marginStart="24dp"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+
+
+
