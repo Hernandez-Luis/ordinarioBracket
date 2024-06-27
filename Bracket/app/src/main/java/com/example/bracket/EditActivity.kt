@@ -38,8 +38,7 @@ class EditActivity : AppCompatActivity() {
 
         binding.tieNombreTorneo.setText(nombreTorneo)
         binding.actvTipoEliminacion.setText(tipoEliminacion, false)
-        binding.actvNumEquipos.setText(numEquipos,
-            )
+        binding.actvNumEquipos.setText(numEquipos,)
 
         val tipoEliminacionArray = arrayOf("Directa", "Doble")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tipoEliminacionArray)

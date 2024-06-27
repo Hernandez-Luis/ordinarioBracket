@@ -152,7 +152,7 @@ class EditActivityIniciado : AppCompatActivity() {
             //matchupsPerdedores.clear()
             //bracketContainerPerdedores.removeAllViews()
 
-            jugadoresPerdedores.shuffle()
+            //jugadoresPerdedores.shuffle()
             if(jugadoresPerdedores.isEmpty()){
                 Log.d(TAG,"------ VACIO -----")
             } else{
