@@ -1,12 +1,14 @@
 package com.example.bracket
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
+import android.view.Vie
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -14,13 +16,16 @@ class EditActivityIniciado : AppCompatActivity() {
 
     private lateinit var playerNames: ArrayList<String>
     private lateinit var bracketContainer: LinearLayout
-    private var round: Int = 0
     private var matchups: MutableList<Pair<String, String>> = mutableListOf()
     private lateinit var nombreTorneo:String
+    private lateinit var tipoEliminacion:String
+    private lateinit var numEquipos:String
     private lateinit var buttonSiguienteRonda: Button
     private lateinit var figuraPerfil: ImageView
     private lateinit var figuraGanador: ImageView
 
+
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_iniciado)
@@ -42,8 +47,12 @@ class EditActivityIniciado : AppCompatActivity() {
         }
 
         nombreTorneo = intent.getStringExtra(getString(R.string.k_nombreTorneo)).toString()
-        val tipoEliminacion = intent.getStringExtra(getString(R.string.k_tipoEliminaciono))
-        val numEquipos = intent.getStringExtra(getString(R.string.k_numEquipos))
+        tipoEliminacion = intent.getStringExtra(getString(R.string.k_tipoEliminaciono)).toString()
+        numEquipos = intent.getStringExtra(getString(R.string.k_numEquipos)).toString()
+
+//        val mensaje = "Tipo de Eliminación: $tipoEliminacion \nNúmero de Equipos: $numEquipos"
+//        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+
         playerNames = intent.getStringArrayListExtra("playerNames") ?: arrayListOf()
 
         val textViewNombreTorneo = findViewById<TextView>(R.id.textViewNombreTorneo)
@@ -85,7 +94,7 @@ class EditActivityIniciado : AppCompatActivity() {
             if (i + 1 < playerNames.size) {
                 matchups.add(Pair(playerNames[i], playerNames[i + 1]))
             } else {
-                matchups.add(Pair(playerNames[i], "BYE"))
+                matchups.add(Pair(playerNames[i], "ADIÓS :c"))
             }
         }
 
@@ -109,7 +118,7 @@ class EditActivityIniciado : AppCompatActivity() {
             }
             radioGroup.addView(radioButton1)
 
-            if (player2 != "BYE") {
+            if (player2 != "ADIÓS :c") {
                 val radioButton2 = RadioButton(this).apply {
                     text = player2
                     layoutParams = LinearLayout.LayoutParams(
@@ -126,6 +135,7 @@ class EditActivityIniciado : AppCompatActivity() {
 
     private fun siguienteRonda() {
         val nuevosGanadores = mutableListOf<String>()
+        val nuevosPerdedores = mutableListOf<String>()
         for (i in 0 until bracketContainer.childCount) {
             val view = bracketContainer.getChildAt(i)
             if (view is RadioGroup) {
@@ -133,6 +143,9 @@ class EditActivityIniciado : AppCompatActivity() {
                 if (selectedRadioButtonId != -1) {
                     val selectedRadioButton = view.findViewById<RadioButton>(selectedRadioButtonId)
                     nuevosGanadores.add(selectedRadioButton.text.toString())
+                } else {
+                    val perdedor = view.findViewById<RadioButton>(selectedRadioButtonId)
+                    nuevosPerdedores.add(perdedor.text.toString())
                 }
             }
         }
@@ -159,8 +172,13 @@ class EditActivityIniciado : AppCompatActivity() {
             buttonSiguienteRonda.visibility = View.GONE
             figuraPerfil.visibility = View.GONE
         } else {
+            // Agrega solo a los ganadores de la ronda anterior
             playerNames = ArrayList(nuevosGanadores)
             mostrarBracket()
+
+            if (tipoEliminacion == "Doble"){
+
+            }
         }
     }
 

@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bracket.databinding.ActivityEditBinding
@@ -30,20 +31,20 @@ class EditActivity : AppCompatActivity() {
             insets
         }
 
-        val nombreTorneo = intent.getStringExtra(getString(R.string.k_nombreTorneo))
-        val tipoEliminacion = intent.getStringExtra(getString(R.string.k_tipoEliminaciono))
-        val numEquipos = intent.getStringExtra(getString(R.string.k_numEquipos))
-        val playerNames = intent.getStringArrayListExtra("playerNames") ?: arrayListOf()
-
-        binding.tieNombreTorneo.setText(nombreTorneo)
-        binding.actvTipoEliminacion.setText(tipoEliminacion, false)
-        binding.actvNumEquipos.setText(numEquipos, false)
+//        val nombreTorneo = intent.getStringExtra(getString(R.string.k_nombreTorneo))
+//        val tipoEliminacion = intent.getStringExtra(getString(R.string.k_tipoEliminaciono))
+//        val numEquipos = intent.getStringExtra(getString(R.string.k_numEquipos))
+//        val playerNames = intent.getStringArrayListExtra("playerNames") ?: arrayListOf()
+//
+//        binding.tieNombreTorneo.setText(nombreTorneo)
+//        binding.actvTipoEliminacion.setText(tipoEliminacion, false)
+//        binding.actvNumEquipos.setText(numEquipos, false)
 
         val tipoEliminacionArray = arrayOf("Directa", "Doble")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tipoEliminacionArray)
         binding.actvTipoEliminacion.setAdapter(adapter)
 
-        val numeroEquiposArray = arrayOf("4", "8")
+        val numeroEquiposArray = arrayOf("4", "6", "8", "10","12","14")
         val adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, numeroEquiposArray)
         binding.actvNumEquipos.setAdapter(adapter2)
 
@@ -52,8 +53,8 @@ class EditActivity : AppCompatActivity() {
             addPlayerInputs(numPlayers)
         }
 
-        addPlayerInputs(playerNames.size)
-        setPlayerNames(playerNames)
+//        addPlayerInputs(playerNames.size)
+//        setPlayerNames(playerNames)
 
         val botonCancelar: Button = findViewById(R.id.cancelarTorneo)
         botonCancelar.setOnClickListener {
@@ -114,13 +115,12 @@ class EditActivity : AppCompatActivity() {
     }
 
     fun enviarInfo() {
-        val intent = Intent()
+        val intent = Intent(this, EditActivityIniciado::class.java) // Reemplaza DestinoActivity con la actividad a la que deseas enviar los datos
         intent.putExtra(getString(R.string.k_nombreTorneo), binding.tieNombreTorneo.text.toString())
         intent.putExtra(getString(R.string.k_tipoEliminaciono), binding.actvTipoEliminacion.text.toString())
         intent.putExtra(getString(R.string.k_numEquipos), binding.actvNumEquipos.text.toString())
 
-        setResult(RESULT_OK, intent)
-        finish()
+        startActivity(intent)
     }
 
 
