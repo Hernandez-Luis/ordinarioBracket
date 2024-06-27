@@ -3,11 +3,8 @@ package com.example.bracket
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.view.View
+import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,12 +17,17 @@ class EditActivityIniciado : AppCompatActivity() {
     private var round: Int = 0
     private var matchups: MutableList<Pair<String, String>> = mutableListOf()
     private lateinit var nombreTorneo:String
+    private lateinit var buttonSiguienteRonda: Button
+    private lateinit var figuraPerfil: ImageView
+    private lateinit var figuraGanador: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_iniciado)
 
         enableEdgeToEdge()
+
+        figuraGanador = findViewById(R.id.figura_ganador)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -50,6 +52,15 @@ class EditActivityIniciado : AppCompatActivity() {
         bracketContainer = findViewById(R.id.ly1v3)
         mostrarBracket()
 
+        buttonSiguienteRonda = findViewById(R.id.buttonSiguienteRonda)
+        buttonSiguienteRonda.setOnClickListener {
+            if (validarSelecciones()) {
+                siguienteRonda()
+            } else {
+                Toast.makeText(this, "Selecciona un ganador para cada bina.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         val botonEditar: Button = findViewById(R.id.editar)
         botonEditar.setOnClickListener {
             val intent = Intent(this, EditActivity::class.java).apply {
@@ -61,10 +72,7 @@ class EditActivityIniciado : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val buttonSiguienteRonda: Button = findViewById(R.id.buttonSiguienteRonda)
-        buttonSiguienteRonda.setOnClickListener {
-            siguienteRonda()
-        }
+        figuraPerfil = findViewById(R.id.figura_perfil)
     }
 
     private fun mostrarBracket() {
@@ -145,10 +153,26 @@ class EditActivityIniciado : AppCompatActivity() {
             }
             bracketContainer.removeAllViews()
             bracketContainer.addView(textViewGanador)
+
+            // Ocultar el botón y la figura de perfil
+            figuraGanador.visibility = View.VISIBLE
+            buttonSiguienteRonda.visibility = View.GONE
+            figuraPerfil.visibility = View.GONE
         } else {
             playerNames = ArrayList(nuevosGanadores)
             mostrarBracket()
         }
     }
-}
 
+    private fun validarSelecciones(): Boolean {
+        var todasSeleccionadas = true
+        for (i in 0 until bracketContainer.childCount) {
+            val view = bracketContainer.getChildAt(i)
+            if (view is RadioGroup) {
+                val selectedRadioButtonId = view.checkedRadioButtonId
+                todasSeleccionadas = todasSeleccionadas && (selectedRadioButtonId != -1)
+            }
+        }
+        return todasSeleccionadas
+    }
+}
