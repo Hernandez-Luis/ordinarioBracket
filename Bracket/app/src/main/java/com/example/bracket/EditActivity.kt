@@ -64,15 +64,19 @@ class EditActivity : AppCompatActivity() {
 
         val botonGuardar: Button = findViewById(R.id.guardarTorneo)
         botonGuardar.setOnClickListener {
-            val intent = Intent(this, EditActivityIniciado::class.java)
-            val playerNames = getPlayerNames()
-
-            intent.putStringArrayListExtra("playerNames", ArrayList(playerNames))
-            intent.putExtra(getString(R.string.k_nombreTorneo), binding.tieNombreTorneo.text.toString())
-            startActivity(intent)
-
-            enviarInfo()
+            if (validarCampos()) {
+                val intent = Intent(this, EditActivityIniciado::class.java)
+                val playerNames = getPlayerNames()
+                intent.putStringArrayListExtra("playerNames", ArrayList(playerNames))
+                intent.putExtra(getString(R.string.k_nombreTorneo), binding.tieNombreTorneo.text.toString())
+                startActivity(intent)
+                enviarInfo()
+            } else {
+                // Mostrar un mensaje de error o realizar alguna acción cuando los campos no están completos
+                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
+            }
         }
+
     }
 
     private fun addPlayerInputs(numPlayers: Int) {
@@ -118,4 +122,15 @@ class EditActivity : AppCompatActivity() {
 
         startActivity(intent)
     }
+
+
+    private fun validarCampos(): Boolean {
+        val nombreTorneo = binding.tieNombreTorneo.text.toString().trim()
+        val tipoEliminacion = binding.actvTipoEliminacion.text.toString().trim()
+        val numEquipos = binding.actvNumEquipos.text.toString().trim()
+
+        // Verificar que los campos no estén vacíos
+        return !(nombreTorneo.isEmpty() || tipoEliminacion.isEmpty() || numEquipos.isEmpty())
+    }
+
 }
