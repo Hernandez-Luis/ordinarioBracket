@@ -1,8 +1,10 @@
 package com.example.bracket
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -15,8 +17,11 @@ import androidx.core.view.WindowInsetsCompat
 class EditActivityIniciado : AppCompatActivity() {
 
     private lateinit var playerNames: ArrayList<String>
+    private lateinit var jugadoresPerdedores: ArrayList<String>
     private lateinit var bracketContainer: LinearLayout
+    private lateinit var bracketContainerPerdedores: LinearLayout
     private var matchups: MutableList<Pair<String, String>> = mutableListOf()
+    private var matchupsPerdedores:MutableList<Pair<String, String>> = mutableListOf()
     private lateinit var nombreTorneo:String
     private lateinit var tipoEliminacion:String
     private lateinit var numEquipos:String
@@ -46,12 +51,12 @@ class EditActivityIniciado : AppCompatActivity() {
             startActivity(intent)
         }
 
-        nombreTorneo = intent.getStringExtra(getString(R.string.k_nombreTorneo)).toString()
-        tipoEliminacion = intent.getStringExtra(getString(R.string.k_tipoEliminaciono)).toString()
-        numEquipos = intent.getStringExtra(getString(R.string.k_numEquipos)).toString()
+        nombreTorneo = intent.getStringExtra(getString(R.string.k_nombreTorneo)) ?: "no"
+        tipoEliminacion = intent.getStringExtra(getString(R.string.k_tipoEliminaciono)) ?: "no"
+        numEquipos = intent.getStringExtra(getString(R.string.k_numEquipos)) ?: "no"
 
-//        val mensaje = "Tipo de Eliminación: $tipoEliminacion \nNúmero de Equipos: $numEquipos"
-//        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+        //val mensaje = "Tipo de Eliminación: $tipoEliminacion \nNúmero de Equipos: $numEquipos"
+        //Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
 
         playerNames = intent.getStringArrayListExtra("playerNames") ?: arrayListOf()
 
@@ -60,6 +65,15 @@ class EditActivityIniciado : AppCompatActivity() {
 
         bracketContainer = findViewById(R.id.ly1v3)
         mostrarBracket()
+
+
+        if (tipoEliminacion == "Doble"){
+            bracketContainerPerdedores = findViewById(R.id.containerPerdedores)
+            //
+            // mostrarBracketPerdedores()
+        }
+
+
 
         buttonSiguienteRonda = findViewById(R.id.buttonSiguienteRonda)
         buttonSiguienteRonda.setOnClickListener {
@@ -80,7 +94,6 @@ class EditActivityIniciado : AppCompatActivity() {
             }
             startActivity(intent)
         }
-
         figuraPerfil = findViewById(R.id.figura_perfil)
     }
 
@@ -88,7 +101,7 @@ class EditActivityIniciado : AppCompatActivity() {
         matchups.clear()
         bracketContainer.removeAllViews()
 
-        playerNames.shuffle()
+        //playerNames.shuffle()
 
         for (i in playerNames.indices step 2) {
             if (i + 1 < playerNames.size) {
@@ -133,24 +146,97 @@ class EditActivityIniciado : AppCompatActivity() {
         }
     }
 
+
+        private fun mostrarBracketPerdedores() {
+
+            //matchupsPerdedores.clear()
+            //bracketContainerPerdedores.removeAllViews()
+
+            jugadoresPerdedores.shuffle()
+            if(jugadoresPerdedores.isEmpty()){
+                Log.d(TAG,"------ VACIO -----")
+            } else{
+                Log.d(TAG,"------ LLENO -----")
+            }
+
+            for (i in jugadoresPerdedores.indices step 2) {
+                if (i + 1 < jugadoresPerdedores.size) {
+                    matchupsPerdedores.add(Pair(jugadoresPerdedores[i], jugadoresPerdedores[i + 1]))
+                } else {
+                    matchupsPerdedores.add(Pair(jugadoresPerdedores[i], "ADIÓS :c"))
+                }
+            }
+
+            for ((player1, player2) in matchupsPerdedores) {
+                val radioGroup = RadioGroup(this).apply {
+                    orientation = RadioGroup.VERTICAL
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    ).apply {
+                        setMargins(120, 0, 0, 60)
+                    }
+                }
+
+                val radioButton1 = RadioButton(this).apply {
+                    text = player1
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                }
+                radioGroup.addView(radioButton1)
+
+                if (player2 != "ADIÓS :c") {
+                    val radioButton2 = RadioButton(this).apply {
+                        text = player2
+                        layoutParams = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        )
+                    }
+                    radioGroup.addView(radioButton2)
+                }
+
+                bracketContainerPerdedores.addView(radioGroup)
+            }
+        }
+
+
     private fun siguienteRonda() {
+
         val nuevosGanadores = mutableListOf<String>()
         val nuevosPerdedores = mutableListOf<String>()
         for (i in 0 until bracketContainer.childCount) {
             val view = bracketContainer.getChildAt(i)
             if (view is RadioGroup) {
-                val selectedRadioButtonId = view.checkedRadioButtonId
-                if (selectedRadioButtonId != -1) {
-                    val selectedRadioButton = view.findViewById<RadioButton>(selectedRadioButtonId)
-                    nuevosGanadores.add(selectedRadioButton.text.toString())
-                } else {
-                    val perdedor = view.findViewById<RadioButton>(selectedRadioButtonId)
-                    nuevosPerdedores.add(perdedor.text.toString())
+                for (j in 0 until view.childCount) {
+                    val radioButton = view.getChildAt(j) as? RadioButton
+                    radioButton?.let {
+                        if (it.isChecked) {
+                            nuevosGanadores.add(it.text.toString())
+                        } else {
+                            nuevosPerdedores.add(it.text.toString())
+                        }
+                    }
                 }
             }
         }
 
-        if (nuevosGanadores.size == 1) {
+        //Instruccion para mostrar la lista de los perdedores
+        //val perdedoresText = "Perdedores:\n${nuevosPerdedores.joinToString("\n")}"
+        //Toast.makeText(this, perdedoresText, Toast.LENGTH_LONG).show()
+
+        /*
+        if (nuevosGanadores.size == 1 && nuevosPerdedores.size == 1){
+            nuevosGanadores.addAll(nuevosPerdedores)
+        }
+
+         */
+
+
+
+        if (nuevosGanadores.size == 1 ) {
             // Mostrar el ganador
             val textViewGanador = TextView(this).apply {
                 text = "\t\t ¡¡GANADOR:!! \n\n Felicidades ¡${nuevosGanadores[0]}! ganaste el torneo de '${nombreTorneo}'"
@@ -176,9 +262,13 @@ class EditActivityIniciado : AppCompatActivity() {
             playerNames = ArrayList(nuevosGanadores)
             mostrarBracket()
 
-            if (tipoEliminacion == "Doble"){
 
+            if (tipoEliminacion == "Doble"){
+                jugadoresPerdedores = ArrayList(nuevosPerdedores)
+                mostrarBracketPerdedores()
             }
+
+
         }
     }
 

@@ -31,20 +31,21 @@ class EditActivity : AppCompatActivity() {
             insets
         }
 
-//        val nombreTorneo = intent.getStringExtra(getString(R.string.k_nombreTorneo))
-//        val tipoEliminacion = intent.getStringExtra(getString(R.string.k_tipoEliminaciono))
-//        val numEquipos = intent.getStringExtra(getString(R.string.k_numEquipos))
-//        val playerNames = intent.getStringArrayListExtra("playerNames") ?: arrayListOf()
-//
-//        binding.tieNombreTorneo.setText(nombreTorneo)
-//        binding.actvTipoEliminacion.setText(tipoEliminacion, false)
-//        binding.actvNumEquipos.setText(numEquipos, false)
+        val nombreTorneo = intent.getStringExtra(getString(R.string.k_nombreTorneo))
+        val tipoEliminacion = intent.getStringExtra(getString(R.string.k_tipoEliminaciono))
+        val numEquipos = intent.getStringExtra(getString(R.string.k_numEquipos))
+        val playerNames = intent.getStringArrayListExtra("playerNames") ?: arrayListOf()
+
+        binding.tieNombreTorneo.setText(nombreTorneo)
+        binding.actvTipoEliminacion.setText(tipoEliminacion, false)
+        binding.actvNumEquipos.setText(numEquipos,
+            )
 
         val tipoEliminacionArray = arrayOf("Directa", "Doble")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tipoEliminacionArray)
         binding.actvTipoEliminacion.setAdapter(adapter)
 
-        val numeroEquiposArray = arrayOf("4", "6", "8", "10","12","14")
+        val numeroEquiposArray = arrayOf("4", "8", "12", "16","20","24")
         val adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, numeroEquiposArray)
         binding.actvNumEquipos.setAdapter(adapter2)
 
@@ -53,8 +54,8 @@ class EditActivity : AppCompatActivity() {
             addPlayerInputs(numPlayers)
         }
 
-//        addPlayerInputs(playerNames.size)
-//        setPlayerNames(playerNames)
+        addPlayerInputs(playerNames.size)
+        setPlayerNames(playerNames)
 
         val botonCancelar: Button = findViewById(R.id.cancelarTorneo)
         botonCancelar.setOnClickListener {
@@ -66,11 +67,29 @@ class EditActivity : AppCompatActivity() {
         botonGuardar.setOnClickListener {
             if (validarCampos()) {
                 val intent = Intent(this, EditActivityIniciado::class.java)
-                val playerNames = getPlayerNames()
+                val playerNames = getPlayerNames().shuffled()
+
+
+                val nombreTorneo = binding.tieNombreTorneo.text.toString()
+                val tipoEliminacion = binding.actvTipoEliminacion.text.toString()
+                val numEquipos = binding.actvNumEquipos.text.toString()
+
                 intent.putStringArrayListExtra("playerNames", ArrayList(playerNames))
                 intent.putExtra(getString(R.string.k_nombreTorneo), binding.tieNombreTorneo.text.toString())
+
+                // Crear un mensaje para el Toast
+                //val mensaje = "TipoEliminacion: $tipoEliminacion\n" + "N ugadores: $numEquipos"
+                // Mostrar el Toast
+                //Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+
+                // Preparar el Intent para enviar la información a la siguiente actividad
+                intent.putExtra(getString(R.string.k_nombreTorneo), nombreTorneo)
+                intent.putExtra(getString(R.string.k_tipoEliminaciono), tipoEliminacion)
+                intent.putExtra(getString(R.string.k_numEquipos), numEquipos)
+
                 startActivity(intent)
-                enviarInfo()
+
+
             } else {
                 // Mostrar un mensaje de error o realizar alguna acción cuando los campos no están completos
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
@@ -115,10 +134,20 @@ class EditActivity : AppCompatActivity() {
     }
 
     fun enviarInfo() {
-        val intent = Intent(this, EditActivityIniciado::class.java) // Reemplaza DestinoActivity con la actividad a la que deseas enviar los datos
-        intent.putExtra(getString(R.string.k_nombreTorneo), binding.tieNombreTorneo.text.toString())
-        intent.putExtra(getString(R.string.k_tipoEliminaciono), binding.actvTipoEliminacion.text.toString())
-        intent.putExtra(getString(R.string.k_numEquipos), binding.actvNumEquipos.text.toString())
+        val nombreTorneo = binding.tieNombreTorneo.text.toString()
+        val tipoEliminacion = binding.actvTipoEliminacion.text.toString()
+        val numEquipos = binding.actvNumEquipos.text.toString()
+
+        // Crear un mensaje para el Toast
+        //val mensaje = "TipoEliminacion: $tipoEliminacion\n" + "N ugadores: $numEquipos"
+        // Mostrar el Toast
+        //Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+
+        // Preparar el Intent para enviar la información a la siguiente actividad
+        val intent = Intent(this, EditActivityIniciado::class.java)
+        intent.putExtra(getString(R.string.k_nombreTorneo), nombreTorneo)
+        intent.putExtra(getString(R.string.k_tipoEliminaciono), tipoEliminacion)
+        intent.putExtra(getString(R.string.k_numEquipos), numEquipos)
 
         startActivity(intent)
     }
@@ -128,6 +157,7 @@ class EditActivity : AppCompatActivity() {
         val nombreTorneo = binding.tieNombreTorneo.text.toString().trim()
         val tipoEliminacion = binding.actvTipoEliminacion.text.toString().trim()
         val numEquipos = binding.actvNumEquipos.text.toString().trim()
+
 
         // Verificar que los campos no estén vacíos
         return !(nombreTorneo.isEmpty() || tipoEliminacion.isEmpty() || numEquipos.isEmpty())
